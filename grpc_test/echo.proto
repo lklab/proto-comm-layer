@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package echo;
+
+service EchoService {
+  // 1. 클라이언트 -> 서버: Request, 서버 -> 클라이언트: Response (단일 요청/응답)
+  rpc SendRequest(Request) returns (Response);
+
+  // 2. 서버 -> 클라이언트: State (서버 단방향 스트리밍)
+  rpc StreamState(Empty) returns (stream State);
+}
+
+message Request {
+  string message = 1;
+}
+
+message Response {
+  string message = 1;
+}
+
+message State {
+  int32 request_count = 1;
+}
+
+message Empty {}
