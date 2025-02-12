@@ -70,8 +70,9 @@ class MessageHandler :
         try:
             return await asyncio.wait_for(future, timeout)
         except :
-            del self.response_futures[rqid]
             raise
+        finally :
+            del self.response_futures[rqid]
 
     def disconnect(self) :
         if self.state == MessageState.DISCONNECTED :
